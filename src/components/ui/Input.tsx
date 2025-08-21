@@ -2,6 +2,7 @@ import React from "react";
 import type { InputType } from "../../utils/types";
 
 const Input: React.FC<InputType> = ({ type, id, height, width, minWidth, dir, register, onChange, value }) => {
+  //djskhjckdsjcdslkds
   return (
     <div
       className="input-container"

@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import type { UseFormRegisterReturn } from "react-hook-form";
 
 export interface FormValue {
-  m: number;
-  n: number;
+  m: number | string;
+  n: number | string;
 }
 
 export interface BoxProps {
@@ -11,16 +11,16 @@ export interface BoxProps {
   height: number;
   minWidth?: number;
 }
-export interface ButtonType extends BoxProps {
+export interface ButtonType {
   children: ReactNode;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
-  calssName?: string;
+  className?: string;
 }
 export interface InputType extends BoxProps {
+  className?: string;
   type: React.HTMLInputTypeAttribute;
   id?: string;
-  dir?: "ltr" | "rtl" | "auto";
   register?: UseFormRegisterReturn;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string | number | readonly string[] | undefined;

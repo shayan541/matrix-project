@@ -5,6 +5,10 @@ export const toPersianNumber = (num: string) => {
   return num.replace(/\d/g, (d) => persianDigits[parseInt(d)]);
 };
 
+export const englishNumber = (val: string) => {
+  return val.replace(/[۰-۹]/g, (d) => `${"۰۱۲۳۴۵۶۷۸۹".indexOf(d)}`);
+};
+
 export const handleSort = (matrix: string[][] | null): string[][] | null => {
   if (!matrix) return null;
 

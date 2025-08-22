@@ -1,14 +1,15 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import type { FormValue } from "../../utils/types";
 import InputAndErrors from "./InputAndErrors";
 import Button from "../ui/Button";
+import { englishNumber, toPersianNumber } from "../../utils/functions";
 
 const MatrixForm: React.FC<{ onSubmit: (value: FormValue) => void }> = ({ onSubmit }) => {
   const {
-    register,
     handleSubmit,
     formState: { errors },
+    control,
   } = useForm<FormValue>();
   const submitHandler = (data: FormValue) => {
     onSubmit(data);
@@ -16,42 +17,50 @@ const MatrixForm: React.FC<{ onSubmit: (value: FormValue) => void }> = ({ onSubm
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <div className="matrix-table-wrapper">
-        <InputAndErrors
-          errors={errors.m?.message}
-          height={40}
-          label=" :ردیف ها (m)"
-          type="number"
-          width={400}
-          dir="ltr"
-          id="m-input"
-          register={register("m", {
-            required: { value: true, message: "این فیلد اجباری است" },
+      <div className="matrix-form-wrapper mt-25">
+        <Controller
+          name="m"
+          control={control}
+          rules={{
+            required: "این فیلد اجباری است",
             min: { value: 4, message: "عدد باید بزرگتر از 3 باشد" },
-            validate: (value) => value % 2 === 1 || "عدد باید فرد باشد",
-          })}
+            validate: (value) => Number(value) % 2 === 1 || "عدد باید فرد باشد",
+          }}
+          render={({ field }) => (
+            <InputAndErrors
+              errors={errors.m?.message}
+              height={40}
+              label="سطر ها (m):"
+              type="text"
+              width={200}
+              id="m-input"
+              value={toPersianNumber(field.value?.toString() || "")}
+              onChange={(e) => field.onChange(englishNumber(e.target.value))}
+            />
+          )}
         />
-
-        <InputAndErrors
-          errors={errors.n?.message}
-          height={40}
-          label=" :ستون ها (n)"
-          type="number"
-          width={400}
-          dir="ltr"
-          id="n-input"
-          register={register("n", {
-            required: { value: true, message: "این فیلد اجباری است" },
+        <Controller
+          name="n"
+          control={control}
+          rules={{
+            required: "این فیلد اجباری است",
             min: { value: 4, message: "عدد باید بزرگتر از 3 باشد" },
-            validate: (value) => value % 2 === 1 || "عدد باید فرد باشد",
-          })}
+            validate: (value) => Number(value) % 2 === 1 || "عدد باید فرد باشد",
+          }}
+          render={({ field }) => (
+            <InputAndErrors
+              errors={errors.n?.message}
+              height={40}
+              label=" ستون ها (n):"
+              type="text"
+              width={200}
+              id="n-input"
+              value={toPersianNumber(field.value?.toString() || "")}
+              onChange={(e) => field.onChange(englishNumber(e.target.value))}
+            />
+          )}
         />
-      </div>
-
-      <div className="matrix-table-wrapper">
-        <Button type="submit" width={400} height={60}>
-          ساخت جدول
-        </Button>
+        <Button type="submit">ساخت جدول</Button>
       </div>
     </form>
   );

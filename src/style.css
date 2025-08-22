@@ -22,7 +22,7 @@ body {
 }
 
 .matrix-parent {
-  max-width: 700px;
+  max-width: 1000px;
   width: 100%;
   background-color: #f3f4f6;
   padding: 20px 30px;
@@ -75,12 +75,12 @@ body {
   height: 100%;
   padding: 0px 10px;
 }
-.input-container input[type=number]::-webkit-inner-spin-button,
-.input-container input[type=number]::-webkit-outer-spin-button {
+.input-container input[type="number"]::-webkit-inner-spin-button,
+.input-container input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-.input-container input[type=number] {
+.input-container input[type="number"] {
   -moz-appearance: textfield;
 }
 
@@ -122,4 +122,4 @@ body {
     justify-items: center;
     align-items: center;
   }
-}/*# sourceMappingURL=style.css.map */
+} /*# sourceMappingURL=style.css.map */

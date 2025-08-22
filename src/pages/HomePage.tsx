@@ -7,9 +7,9 @@ const HomePage = () => {
     <div className="container">
       <div className="matrix-parent">
         <h1>به پیج سورت ماتریس خوش آمدید</h1>
-        <div className="mt-100">
+        <div className="mt-100 flex-center">
           <Link to="/matrix">
-            <Button type="submit" width={400} height={60} onClick={onClickHandler}>
+            <Button type="submit" onClick={onClickHandler}>
               برو به صفحه ماتریس ها
             </Button>
           </Link>

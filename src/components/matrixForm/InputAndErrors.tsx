@@ -2,16 +2,22 @@ import React from "react";
 import type { LabelErrorsInput } from "../../utils/types";
 import Input from "../ui/Input";
 
-const InputAndErrors: React.FC<LabelErrorsInput> = ({ height, label, type, width, dir, id, register, errors ,value}) => {
+const InputAndErrors: React.FC<LabelErrorsInput> = ({ label, type, id, register, errors, value, onChange, className, onKeyDown }) => {
   return (
-    <div className="input-label-container  w-full">
-      <div>
-        <label htmlFor="m-input"> {label} </label>
-      </div>
-      <div style={{ maxWidth: width ? `${width}px` : "auto", width: "100%" }}>
-        <Input height={height} width={width} dir={dir} type={type} id={id} register={register} value={value}/>
-        <p> {errors}</p>
-      </div>
+    <div className="input-label-container">
+      <label htmlFor="m-input"> {label} </label>
+
+      <Input
+        className={className ? className : ""}
+        type={type}
+        id={id}
+        {...(register ? register : {})}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
+
+      <p className="text-error">{errors}</p>
     </div>
   );
 };

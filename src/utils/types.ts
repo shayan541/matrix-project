@@ -6,29 +6,26 @@ export interface FormValue {
   n: number | string;
 }
 
-export interface BoxProps {
-  width: number;
-  height: number;
-  minWidth?: number;
-}
 export interface ButtonType {
   children: ReactNode;
   type?: "button" | "submit" | "reset";
   onClick?: () => void;
   className?: string;
 }
-export interface InputType extends BoxProps {
+export interface InputType {
   className?: string;
   type: React.HTMLInputTypeAttribute;
   id?: string;
   register?: UseFormRegisterReturn;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   value?: string | number | readonly string[] | undefined;
 }
 
 export interface LabelErrorsInput extends InputType {
   label: string;
   errors: string | undefined;
+  className?: string;
 }
 
 export interface MatrixType {

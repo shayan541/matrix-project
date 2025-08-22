@@ -1,24 +1,18 @@
 import React from "react";
 import type { InputType } from "../../utils/types";
 
-const Input: React.FC<InputType> = ({ type, id, height, width, minWidth, register, onChange, value, className }) => {
+const Input: React.FC<InputType> = ({ type, id, register, onChange, value, className, onKeyDown }) => {
   return (
-    <div
-      className={`input-container ${className ? className : ""}`}
-      style={{
-        maxWidth: width ? `${width}px` : "auto",
-        height: height ? `${height}px` : "auto",
-        minWidth: minWidth ? `${minWidth}px` : "auto",
-      }}
-    >
+    <div className={`input-container `}>
       <input
-      dir="ltr"
+        className={`${className ? className : ""}`}
+        dir="ltr"
         value={value}
         {...(id ? { id: id } : {})}
         type={type}
-        style={{ fontSize: height ? `${height * 0.6}px` : "auto", width: "100%" }}
         {...(register ? register : {})}
         onChange={(e) => onChange?.(e)}
+        onKeyDown={(e) => onKeyDown?.(e)}
       />
     </div>
   );

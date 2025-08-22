@@ -1,11 +1,4 @@
-@font-face {
-  font-family: "Yekan";
-  src: url("./assets/fonts/Yekan.woff2") format("woff2"), url("../assets/fonts/Yekan.woff") format("woff"),
-    url("../assets/fonts/Yekan.ttf") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
+@import "./fonts.css";
 
 $primary-color: #22498d;
 $secondery-color: #71a0f0;
@@ -19,7 +12,7 @@ $layout-color: rgb(70, 65, 65);
 }
 
 body {
-  font-family:  "Yekan";
+  font-family: "IRANYekan", sans-serif;
   background-color: white;
 }
 .mt-10 {
@@ -45,6 +38,17 @@ body {
   color: red;
 }
 
+.justify-between {
+  justify-content: space-between;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.gap-65 {
+  gap: 65px;
+}
+
 .container {
   width: 100%;
   height: 100%;
@@ -64,22 +68,23 @@ body {
   width: 100%;
   background-color: $bg-color;
   padding: 20px 30px;
-  @media (max-width: 768px) {
-    max-width: 400px;
-  }
 }
 
 .input-label-container {
+  position: relative;
   display: flex;
   flex-direction: row;
+  max-width: 200px;
+  width: 100%;
   gap: 5px;
-  div:first-child {
-    position: relative;
-    width: 100%;
-  }
+
   p {
     margin: 7px 0px;
     position: absolute;
+    top: 40px;
+  }
+  input {
+    height: 40px;
   }
   label {
     margin-top: 10px;
@@ -87,9 +92,7 @@ body {
     margin-bottom: 10px;
     display: inline-block;
     text-align: right;
-  }
-  @media (max-width: 481px) {
-    flex-direction: column;
+    width: 182px;
   }
 }
 
@@ -101,6 +104,7 @@ body {
   background-color: white;
   display: flex;
   flex-direction: column;
+  max-width: 100px;
   &:hover {
     border: 1px solid $secondery-color;
   }
@@ -124,14 +128,12 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-.matrix-form-wrapper {
+.matrix-wrapper {
   width: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  gap: 30px;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 45px;
+  flex-direction: column;
   .table-container {
     display: flex;
     justify-content: center;
@@ -142,9 +144,24 @@ input[type="number"] {
     padding-right: 16px;
     padding-left: 10px;
   }
+}
+
+.form-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+
+  align-items: center;
+
   .button-container {
     flex-shrink: 0;
   }
+  div:first-child {
+    display: flex;
+    gap: 30px;
+  }
+
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: start;
@@ -167,6 +184,7 @@ input[type="number"] {
     padding-bottom: 8.5px;
     border: none;
     width: 100%;
+    font-family: "IRANYekan", sans-serif;
   }
   &:hover {
     border: 1px solid $secondery-color;
@@ -249,4 +267,10 @@ nav {
 
 .input-error {
   border: 1px solid red !important;
+}
+
+.matrix-input-class {
+  max-width: 60px;
+  height: 30px;
+  min-width: 40px;
 }

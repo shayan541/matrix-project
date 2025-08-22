@@ -34,16 +34,19 @@ const Matrix: React.FC<MatrixCommonProps> = ({ m, n, matrix: initialMatrix, onCh
     }
   }, [initialMatrix, mNum, nNum]);
 
-  const handleChange = (r: number, c: number, val: string) => {
-    const newValues = [...values];
-    newValues[r] = [...newValues[r]];
-    newValues[r][c] = val;
-    setValues(newValues);
-    onChange?.(newValues);
+  const handleChange = (r: number, c: number, value: string) => {
+    const val = englishNumber(value);
+    if (val === "" || val === "-" || val === "0" || /^-?[1-9]\d*$/.test(val)) {
+      const newValues = [...values];
+      newValues[r] = [...newValues[r]];
+      newValues[r][c] = val;
+      setValues(newValues);
+      onChange?.(newValues);
+    }
   };
 
   return (
-    <div className="matrix-form-wrapper mt-100">
+    <div className="matrix-wrapper mt-100">
       <div className="table-container">
         <table dir="ltr">
           <tbody>
@@ -79,17 +82,12 @@ const Matrix: React.FC<MatrixCommonProps> = ({ m, n, matrix: initialMatrix, onCh
                     }}
                   >
                     <Input
-                      height={30}
                       type="text"
-                      width={60}
-                      minWidth={40}
                       value={toPersianNumber(values[r]?.[c] || "")}
                       onChange={(e) => {
-                        const val = englishNumber(e.target.value);
-                        if (val === "" || val === "-" || val === "0" || /^-?[1-9]\d*$/.test(val))
-                          handleChange(r, c, englishNumber(e.target.value));
+                        handleChange(r, c, e.target.value);
                       }}
-                      className={matrixErrors?.some((err) => err.row === r && err.col === c) ? "input-error" : ""}
+                      className={`${matrixErrors?.some((err) => err.row === r && err.col === c) ? "input-error" : ""} matrix-input-class`}
                     />
 
                     {itemHoveredIndex?.r === r &&

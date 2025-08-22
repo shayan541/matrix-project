@@ -17,49 +17,71 @@ const MatrixForm: React.FC<{ onSubmit: (value: FormValue) => void }> = ({ onSubm
 
   return (
     <form onSubmit={handleSubmit(submitHandler)}>
-      <div className="matrix-form-wrapper mt-25">
-        <Controller
-          name="m"
-          control={control}
-          rules={{
-            required: "این فیلد اجباری است",
-            min: { value: 4, message: "عدد باید بزرگتر از 3 باشد" },
-            validate: (value) => Number(value) % 2 === 1 || "عدد باید فرد باشد",
-          }}
-          render={({ field }) => (
-            <InputAndErrors
-              errors={errors.m?.message}
-              height={40}
-              label="سطر ها (m):"
-              type="text"
-              width={200}
-              id="m-input"
-              value={toPersianNumber(field.value?.toString() || "")}
-              onChange={(e) => field.onChange(englishNumber(e.target.value))}
-            />
-          )}
-        />
-        <Controller
-          name="n"
-          control={control}
-          rules={{
-            required: "این فیلد اجباری است",
-            min: { value: 4, message: "عدد باید بزرگتر از 3 باشد" },
-            validate: (value) => Number(value) % 2 === 1 || "عدد باید فرد باشد",
-          }}
-          render={({ field }) => (
-            <InputAndErrors
-              errors={errors.n?.message}
-              height={40}
-              label=" ستون ها (n):"
-              type="text"
-              width={200}
-              id="n-input"
-              value={toPersianNumber(field.value?.toString() || "")}
-              onChange={(e) => field.onChange(englishNumber(e.target.value))}
-            />
-          )}
-        />
+      <div className="form-wrapper mt-25 ">
+        <div className="flex-wrap">
+          <Controller
+            name="m"
+            control={control}
+            rules={{
+              required: "این فیلد اجباری است",
+              min: { value: 4, message: "عدد باید بزرگتر از 3 باشد" },
+              validate: (value) => Number(value) % 2 === 1 || "عدد باید فرد باشد",
+            }}
+            render={({ field }) => (
+              <InputAndErrors
+                errors={errors.m?.message}
+                label="سطر ها (m):"
+                type="text"
+                id="m-input"
+                value={toPersianNumber(field.value?.toString() || "")}
+                onChange={(e) => field.onChange(englishNumber(e.target.value))}
+                onKeyDown={(e) => {
+                  if (
+                    !/[0-9۰-۹]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Delete" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight" &&
+                    e.key !== "Tab"
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            )}
+          />
+          <Controller
+            name="n"
+            control={control}
+            rules={{
+              required: "این فیلد اجباری است",
+              min: { value: 4, message: "عدد باید بزرگتر از 3 باشد" },
+              validate: (value) => Number(value) % 2 === 1 || "عدد باید فرد باشد",
+            }}
+            render={({ field }) => (
+              <InputAndErrors
+                errors={errors.n?.message}
+                label=" ستون ها (n):"
+                type="text"
+                id="n-input"
+                value={toPersianNumber(field.value?.toString() || "")}
+                onChange={(e) => field.onChange(englishNumber(e.target.value))}
+                onKeyDown={(e) => {
+                  if (
+                    !/[0-9۰-۹]/.test(e.key) &&
+                    e.key !== "Backspace" &&
+                    e.key !== "Delete" &&
+                    e.key !== "ArrowLeft" &&
+                    e.key !== "ArrowRight" &&
+                    e.key !== "Tab"
+                  ) {
+                    e.preventDefault();
+                  }
+                }}
+              />
+            )}
+          />
+        </div>
         <Button type="submit">ساخت جدول</Button>
       </div>
     </form>
